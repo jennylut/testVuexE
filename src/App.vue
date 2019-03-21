@@ -1,15 +1,7 @@
 <template>
   <div id="app">
-    <!--<HelloWorld msg="hello vuex"/>-->
-    <el-container>
-      <el-header>HEADER</el-header>
-      <el-container>
-        <el-aside width="200px">adide</el-aside>
-        <el-main>
-          main
-        </el-main>
-      </el-container>
-    </el-container>
+    <router-view/>
+
   </div>
 </template>
 
@@ -25,12 +17,7 @@ export default {
 </script>
 
 <style  scoped>
-#app {
-  /*font-family: 'Avenir', Helvetica, Arial, sans-serif;*/
-  /*-webkit-font-smoothing: antialiased;*/
-  /*-moz-osx-font-smoothing: grayscale;*/
-  /*text-align: center;*/
-  /*color: #2c3e50;*/
-  /*margin-top: 60px;*/
-}
+  header.el-header {
+    background: #4c84ff;
+  }
 </style>

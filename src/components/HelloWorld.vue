@@ -1,8 +1,17 @@
 <template>
-  <div class="hello">
-    <h1>{{ msg }}</h1>
-    
-  </div>
+  <!--<div class="hello">-->
+    <!--<h1>{{ msg }}</h1>-->
+    <!---->
+  <!--</div>-->
+  <el-container>
+    <el-header>HEADER</el-header>
+    <el-container>
+      <el-aside width="200px">adide</el-aside>
+      <el-main>
+        main
+      </el-main>
+    </el-container>
+  </el-container>
 </template>
 
 <script>
