@@ -54,14 +54,30 @@
                 this.$refs.loginForm.validate(valid=>{
                     if (valid) {
                         this.is_loading = true
-                        request.post('sesuapi/account/user/login',{
-                            username: _this.loginForm.username,
-                            password: _this.loginForm.password,
-                            token: ''
-                        }).then((res)=>{
-                            console.log(res)
-                        }, err=>{
-                            console.log(err)
+                        // request.post('sesuapi/account/user/login',{
+                        //     username: _this.loginForm.username,
+                        //     password: _this.loginForm.password,
+                        //     token: ''
+                        // }).then((res)=>{
+                        //     // eslint-disable-next-line
+                        //     console.log(res)
+                        // }, err=>{
+                        //     // eslint-disable-next-line
+                        //     console.log(err)
+                        // })
+                        this.$store.dispatch('LoginByUserName',this.loginForm).then(()=>{
+                            this.$message({
+                                message:'登陆成功！',
+                                type:'success'
+                            })
+                            this.is_loading = false
+                            this.$router.push('/hello')
+                        }).catch(err=>{
+                            this.is_loading = false
+                            this.$message({
+                                message:err.message,
+                                type:'error'
+                            })
                         })
                     }
                     this.is_loading = false
