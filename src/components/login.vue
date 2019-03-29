@@ -30,7 +30,7 @@
 </template>
 
 <script>
-    import request from '../utils/request'
+    // import request from '../utils/request'
 
     export default {
         name: "login",
@@ -50,7 +50,7 @@
         },
         methods: {
             handleLogin () {
-                let _this = this
+                // let _this = this
                 this.$refs.loginForm.validate(valid=>{
                     if (valid) {
                         this.is_loading = true

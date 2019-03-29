@@ -6,17 +6,20 @@
   <el-container>
     <el-header>HEADER</el-header>
     <el-container>
-      <el-aside width="200px">adide</el-aside>
+      <el-aside width="200px">aside</el-aside>
       <el-main>
-        main
+        <ClassList></ClassList>
       </el-main>
     </el-container>
   </el-container>
 </template>
 
 <script>
+import ClassList from './classManagement/list'
+
 export default {
   name: 'HelloWorld',
+  components:{ ClassList },
   props: {
     msg: String
   }
