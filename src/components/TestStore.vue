@@ -25,7 +25,7 @@
         data () {
             return {
                 // goods:this.$store.state.test.goods,
-                // totalNum: this.$store.state.test.totalNum
+                // totalNum: this.$store.state.test.totalNum  //不能使用data来获取vuex中的state值，data有缓存，一旦vuex中值改变了，没办法做到响应，放在computed会自动监视依赖
             }
         },
         created (){
