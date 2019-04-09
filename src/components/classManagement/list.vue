@@ -2,10 +2,10 @@
     <div class="classs-list ci-block">
         <el-form :inline="true" :model="searchForm" class="form" size="small">
             <el-form-item label="班级选择：">
-                <el-select :model="searchForm.num_code" placeholder="请输入内容" filterable="" clearable="" @change="handleChange">
+                <el-select v-model="searchForm.num_code" placeholder="请输入内容" filterable clearable @change="handleChange">
                     <el-option
-                        v-for="(item,i) in classSelectList"
-                        :key="i"
+                        v-for="item in classSelectList"
+                        :key="item.class_id"
                         :label="item.num_code"
                         :value="item.num_code"
                     >
@@ -15,17 +15,17 @@
         </el-form>
         <el-table :data="list">
             <el-table-column
-                prop="code"
+                prop="num_code"
                 width="150px"
                 label="班级编号"
             >
             </el-table-column>
             <el-table-column
-                    prop="name"
+                    prop="course_name"
                     label="课程名称">
             </el-table-column>
             <el-table-column
-                    prop="student_count"
+                    prop="number_student"
                     width="80px"
                     label="学生人数">
             </el-table-column>
@@ -65,6 +65,15 @@
 
 <script>
     import request from '../../utils/request'
+    const WEEKLY = {
+        '0': '星期天',
+        '1': '星期一',
+        '2': '星期二',
+        '3': '星期三',
+        '4': '星期四',
+        '5': '星期五',
+        '6': '星期六'
+    }
     export default {
         name: "ClassList",
         data () {
@@ -85,19 +94,55 @@
         },
         methods: {
             getList (){
-               request.get('sesuapi/teacherapi/class-grade/list',{})
-            },
-            handleChange () {
+                this.is_loading = true
+                let params = {
+                    page:this.page,
+                    limit:this.limit,
+                    num_code:this.searchForm.num_code
+                }
+                request.get('sesuapi/teacherapi/class-grade/list',params).then((res)=>{
+                    this.is_loading = false
+                    this.total = res.data.meta.total
+                    this.classSelectList = res.data.classSelectList
+                    let list = []
+                    res.data.list.map(item =>{
+                        let listItem = {
+                            class_id: item.class_id,
+                            num_code: item.num_code,
+                            course_name: item.course_name || '--',
+                            number_student:item.number_student + '/' + item.max_people,
+                            course_time:`${WEEKLY[item.weekly]}${item.class_start_time}-${item.class_end_time}`,
+                            last_lesson_name:item.last_lesson_name || '--'
+                        }
+                        list.push(listItem)
+                    })
+                    this.list = list
 
+                }).catch(err=>{
+                    this.is_loading = false
+                    this.$message({
+                        type:'warning',
+                        message:err.message || '请求失败'
+                    })
+                })
             },
-            handleViewItem (){
-
+            handleChange (val) {
+                console.log(val)
+                this.searchForm.num_code = val
+                this.getList()
             },
-            handleChangePage () {
-
+            handleViewItem (row){
+                console.log(row)
             },
-            handleChangeLimit () {
-
+            handleChangePage (page) {
+                console.log(`${page}`)
+                this.page = page
+                this.getList()
+            },
+            handleChangeLimit (val) {
+                console.log(`${val}`)
+                this.limit = val
+                this.getList()
             }
         }
     }

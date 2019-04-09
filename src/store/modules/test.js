@@ -45,12 +45,12 @@ const test ={
         }
     },
     actions:{
-        addCart({ commit },id){
-            commit('ADD_CART',id)
-        },
-        reduceCart({ commit },id){
-            commit('REDUCE_CART',id)
-        }
+        // addCart({ commit },id){
+        //     commit('ADD_CART',id)
+        // },
+        // reduceCart({ commit },id){
+        //     commit('REDUCE_CART',id)
+        // }
     },
     // getters:{
     //     goods_obj:state => state.goods,

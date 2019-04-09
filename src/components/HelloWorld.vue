@@ -21,7 +21,7 @@ export default {
   name: 'HelloWorld',
   components:{ ClassList },
   props: {
-    msg: String
+   
   }
 }
 </script>

@@ -1,7 +1,8 @@
 import axios from 'axios'
 import qs from 'qs'
+import auth from './auth'
 
-
+const TOKEN_KEY = 'teacher'
 class CIRequest {
     constructor (request, config) {
         this.request = this.initRequest(request, config)
@@ -16,7 +17,7 @@ class CIRequest {
     }
 
     async get (url, data, config) {
-        // data = this.appendToken(data)
+        data = this.appendToken(data)
         // url = `${url}?${qs.stringify(data)}`
         let res = await this.request.get(url, { params: data }, config)
         return this.handleResponse(res)
@@ -35,11 +36,11 @@ class CIRequest {
     //     return this.handleResponse(res)
     // }
 
-    // appendToken (data) {
-    //     data = data || {}
-    //     data.token = auth.getToken(TOKEN_KEY)
-    //     return data
-    // }
+    appendToken (data) {
+        data = data || {}
+        data.token = auth.getToken(TOKEN_KEY)
+        return data
+    }
 
     // appendCategoryName (data) {
     //     data = data || {}
@@ -63,8 +64,8 @@ class CIRequest {
     }
 }
 let request = new CIRequest(axios, {
-    // apiBase: 'http://test.teachapi.xiaomawang.com/',
-    // token: auth.getToken(TOKEN_KEY)
+    apiBase: 'http://test.teachapi.xiaomawang.com/',
+    token: auth.getToken(TOKEN_KEY)
 })
 
 export default request

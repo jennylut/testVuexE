@@ -12,10 +12,10 @@ const store = new  Vuex.Store({
         test
     },
     getters: {
-        // token:state => state.user.token,
-        // avatar:state => state.userinfo.avatar,
-        // name:state => state.userinfo.nickname,
-        // type:state => state.user.type,
+        token:state => state.user.token,
+        avatar:state => state.userinfo.avatar,
+        name:state => state.userinfo.nickname,
+        type:state => state.user.type,
         // goods_obj:state => state.test.goods,
         // goods_length:state => state.test.goods.length
     }
