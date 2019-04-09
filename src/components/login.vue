@@ -71,7 +71,7 @@
                                 type:'success'
                             })
                             this.is_loading = false
-                            this.$router.push('/hello')
+                            this.$router.push('/class')
                         }).catch(err=>{
                             this.is_loading = false
                             this.$message({

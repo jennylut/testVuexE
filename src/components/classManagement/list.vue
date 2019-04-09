@@ -90,9 +90,24 @@
             }
         },
         mounted() {
+            this.getParams()
             this.getList()
         },
+        watch:{
+            $route(route){
+                console.log(route)
+                this.getParams()
+                this.getList()
+            }
+        },
         methods: {
+            getParams(){
+                const { page ,limit ,num_code }  = this.$route.query
+                console.log(this.$route.query)
+                this.page = parseInt(page) || 0
+                this.limit = parseInt(limit) || 10
+                this.searchForm.num_code = num_code
+            },
             getList (){
                 this.is_loading = true
                 let params = {
@@ -128,21 +143,34 @@
             },
             handleChange (val) {
                 console.log(val)
-                this.searchForm.num_code = val
-                this.getList()
+                // this.searchForm.num_code = val
+                // this.getList()
+                this.pathSearch({})
             },
             handleViewItem (row){
                 console.log(row)
             },
             handleChangePage (page) {
                 console.log(`${page}`)
-                this.page = page
-                this.getList()
+                // this.page = page
+                // this.getList()
+                this.pathSearch({page})
             },
-            handleChangeLimit (val) {
-                console.log(`${val}`)
-                this.limit = val
-                this.getList()
+            handleChangeLimit (limit) {
+                console.log(`${limit}`)
+                // this.limit = val
+                // this.getList()
+                this.pathSearch({limit})
+            },
+            pathSearch({page=1,limit=10}){
+                this.$router.push({
+                    path:this.$route.path,
+                    query:{
+                        page,
+                        limit,
+                        ...this.searchForm
+                    }
+                })
             }
         }
     }

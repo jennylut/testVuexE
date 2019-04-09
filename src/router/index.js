@@ -1,16 +1,16 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import HelloWorld from '../components/HelloWorld'
-import Login from '../components/Login'
-import TestStore from '../components/TestStore'
+import ClassMain from '../components/classMain'
+import Login from '../components/login'
+import TestStore from '../components/testStore'
 
 Vue.use(Router)
 export default new Router({
     routes: [
         {
-            path:'/hello',
-            name:'hello',
-            component:HelloWorld
+            path:'/class',
+            name:'class',
+            component:ClassMain
         },
         {
             path:'/login',
